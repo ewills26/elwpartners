@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Dunbia — AI automation, working demo (ELW Partners)</title>
+<style>
+  :root{--ink:#16233a;--ink-soft:#4d5b74;--paper:#f4f6f9;--card:#fff;--accent:#1c4e9c;--accent-dark:#153c78;--gold:#f2b705;--line:#dfe4ec;--radius:14px}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  .preview-banner{background:#123c5a;color:#fff;font-size:.86rem;padding:.55rem 0;text-align:center}
+  .preview-banner b{color:#ffd98a}
+  .topbar{background:var(--ink);color:#fff;font-size:.85rem;padding:.45rem 0}
+  .topbar .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  header.site{background:var(--card);border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;padding:.8rem 20px;gap:1rem}
+  .brand{font-weight:800;font-size:1.12rem}.brand small{display:block;font-weight:500;font-size:.72rem;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase}
+  .hero{background:radial-gradient(1000px 480px at 85% -10%, color-mix(in srgb,var(--accent) 12%,transparent),transparent 60%),linear-gradient(180deg,#fafbfd,var(--paper));padding:3rem 0 2.4rem}
+  .kicker{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-dark);background:color-mix(in srgb,var(--accent) 10%,#fff);border:1px solid color-mix(in srgb,var(--accent) 25%,#fff);padding:.3rem .8rem;border-radius:999px;margin-bottom:1rem}
+  .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.14;letter-spacing:-.02em;max-width:30ch}
+  .hero p.lead{margin-top:1rem;font-size:1.06rem;color:var(--ink-soft);max-width:64ch}
+  section{padding:2.2rem 0}
+  .step{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+  .step .n{background:var(--accent);color:#fff;font-weight:800;font-size:.85rem;width:1.7rem;height:1.7rem;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .step span{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 30px rgba(22,35,58,.08);padding:1.6rem}
+  .card h2{font-size:1.15rem;margin-bottom:.2rem}
+  .card .sub{font-size:.87rem;color:var(--ink-soft);margin-bottom:1rem}
+  .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+  .chip{font-size:.83rem;border:1px solid var(--line);border-radius:999px;padding:.4rem .9rem;cursor:pointer;user-select:none;background:#fafbfd}
+  .chip.on{background:#e3ecfa;border-color:#8fb0e0;color:var(--accent-dark);font-weight:700}
+  textarea.msg{width:100%;font:inherit;font-size:.92rem;padding:.75rem .85rem;border:1px solid var(--line);border-radius:10px;background:#fafbfd;min-height:7.5rem;resize:vertical}
+  .runbtn{background:var(--accent);color:#fff;border:0;font:inherit;font-weight:700;font-size:1rem;padding:.85rem 1.6rem;border-radius:999px;cursor:pointer;margin-top:.9rem}
+  .runbtn:hover{background:var(--accent-dark)}
+  .pipeline{display:none;margin-top:1.3rem}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1.1rem}
+  .stat{background:#eef3fa;border:1px solid #d4e0f0;border-radius:10px;padding:.9rem;text-align:center}
+  .stat b{display:block;font-size:1.35rem;letter-spacing:-.02em}
+  .stat span{font-size:.76rem;color:var(--ink-soft);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+  .lane{border:1px solid var(--line);border-radius:10px;padding:.85rem 1rem;margin-bottom:.6rem;font-size:.89rem}
+  .lane h4{font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:.35rem;display:flex;gap:.5rem;align-items:center}
+  .lane.priority{background:#fdf7e3;border-color:#ecd589}
+  .lane.priority h4{color:#8a6716}
+  .lane .kv{display:grid;grid-template-columns:auto 1fr;gap:.15rem .9rem;font-size:.85rem}
+  .lane .kv b{color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  .draft{background:#f2f6fc;border:1px solid #d4e0f0;border-radius:10px;padding:.9rem 1rem;font-size:.87rem;margin-bottom:.6rem;white-space:pre-line}
+  .draft h4{font-size:.76rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:.35rem}
+  .draft .trans{margin-top:.6rem;padding-top:.6rem;border-top:1px dashed #c4d3e8;color:var(--ink-soft);font-size:.82rem;font-style:italic}
+  .tag{font-size:.72rem;font-weight:800;border-radius:999px;padding:.2rem .65rem;white-space:nowrap}
+  .tag.p{background:#f7e8bd;color:#7a5b10}
+  .tag.r{background:#e3ecfa;color:var(--accent-dark)}
+  .demo-note{margin-top:.9rem;font-size:.76rem;color:var(--ink-soft);font-style:italic}
+  .band{background:var(--ink);color:#fff;border-radius:var(--radius)}
+  .band-inner{padding:2.2rem 2rem}
+  .band h2{color:#fff;font-size:1.45rem;margin-bottom:.5rem}
+  .band>.band-inner>p{color:#c4cede;font-size:.95rem;max-width:64ch}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:1.4rem}
+  .col h3{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+  .band ul{list-style:none;display:grid;gap:.55rem}
+  .band li{display:flex;gap:.6rem;align-items:baseline;font-size:.93rem;color:#e2e8f2}
+  .band li::before{content:"✓";color:var(--gold);font-weight:800}
+  .band .closing{margin-top:1.5rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:1.1rem 1.3rem;font-size:.93rem;color:#e2e8f2}
+  footer{border-top:1px solid var(--line);padding:1.8rem 0 2.4rem;font-size:.84rem;color:var(--ink-soft)}
+  footer .wrap{display:grid;gap:.35rem}
+  .elw{background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:1rem;padding:1rem 1.2rem;font-size:.86rem}
+  .elw b{color:var(--ink)}
+  @media (max-width:820px){.grid2{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.topbar .hide-m{display:none}}
+</style>
+</head>
+<body>
+
+<div class="preview-banner"><b>Working demo</b> — built on spec by ELW Partners for Dunbia. Not live, not indexed by Google, no obligation. Nothing typed here is stored or sent anywhere.</div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="hide-m">Beef &amp; lamb processing · Cross Hands &amp; Llanybydder</span>
+    <span>Demo of an AI enquiry front door</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap"><span class="brand">Dunbia<small>AI automation — working demo by ELW Partners</small></span></div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker">Built from your contact page · working demo</span>
+    <h1>A farmer with cattle to sell and a CV in Romanian arrive through the same front door.</h1>
+    <p class="lead">dunbia.com offers one contact form for four very different conversations — general enquiries, careers, livestock procurement and sales — across eleven sites, and the walk-in answer at Cross Hands is info@dunbia.com. Someone sorts that pile by hand, at office speed. Below is what an AI front door does with it the second each message lands. Pick a message and send it.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="step"><div class="n">1</div><span>The pile — pick a message that lands in the shared inbox</span></div>
+    <div class="card">
+      <h2>Try the front door</h2>
+      <div class="sub">Four typical messages, all fictional. Choose one (or edit it), then send. Nothing is stored, uploaded or sent — this runs entirely on this page.</div>
+      <div class="chips" id="scenarios">
+        <span class="chip on" data-s="farmer" onclick="pick(this)">🐄 Farmer — in Welsh</span>
+        <span class="chip" data-s="buyer" onclick="pick(this)">🥩 Foodservice buyer</span>
+        <span class="chip" data-s="applicant" onclick="pick(this)">📄 Job applicant — in Romanian</span>
+        <span class="chip" data-s="haulier" onclick="pick(this)">🚛 Haulier invoice query</span>
+      </div>
+      <textarea class="msg" id="msg"></textarea>
+      <button class="runbtn" onclick="send()">Send enquiry (demo)</button>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:.4rem" id="step2">
+  <div class="wrap">
+    <div class="step"><div class="n">2</div><span>What happens the moment it lands — before anyone opens the inbox</span></div>
+    <div class="card">
+      <h2 id="p-title">Read, understood, answered, routed</h2>
+      <div class="sub">The agent reads the message, pulls out what matters, drafts the reply in the sender's own language, and routes it to the right team at the right site — with the revenue-carrying messages flagged first.</div>
+      <div class="pipeline" id="pipe">
+        <div class="stats">
+          <div class="stat"><b id="st-time">90 sec</b><span>to first reply</span></div>
+          <div class="stat"><b>24/7</b><span>3:40am counts</span></div>
+          <div class="stat"><b id="st-lang">Welsh</b><span>sender's language</span></div>
+        </div>
+        <div class="lane" id="lane-class">
+          <h4>Understood &amp; extracted <span class="tag r" id="route-tag"></span></h4>
+          <div class="kv" id="kv"></div>
+        </div>
+        <div class="draft" id="draftbox">
+          <h4>Reply drafted &amp; sent — in the sender's language</h4>
+          <div id="draft-body"></div>
+          <div class="trans" id="draft-trans"></div>
+        </div>
+        <div class="lane" id="lane-route">
+          <h4>Routed internally</h4>
+          <div id="route-body" style="font-size:.87rem"></div>
+        </div>
+        <div class="demo-note">Demo with fictional data and example routing rules — yours would be set with you. The live version reads free text in any language, plugs into the existing inbox and contact form (nothing changes for the sender), and your teams see only what's theirs, already summarised. Nobody sorts a pile.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:.4rem">
+  <div class="wrap">
+    <div class="band">
+      <div class="band-inner">
+        <h2>The front door is just the demonstration.</h2>
+        <p>ELW Partners implements AI automation across a business — the same approach that read, answered and routed those messages can run anywhere people currently spend hours on repetitive reading, typing and chasing. For a meat processor, that typically looks like:</p>
+        <div class="grid2">
+          <div class="col">
+            <h3>Costs down</h3>
+            <ul>
+              <li>Goods-in, delivery notes, weighbridge and booking-in paperwork keyed automatically instead of by hand</li>
+              <li>Workforce comms — shift changes, policies, onboarding — answered in the languages your people actually speak</li>
+              <li>Audit and customer-spec documentation drafted for review, not written from scratch</li>
+              <li>Invoice queries matched to the right paperwork and answered without a hunt</li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3>Revenue up</h3>
+            <ul>
+              <li>A farmer offering stock gets an answer in minutes at any hour — first response wins the cattle</li>
+              <li>Buyer and foodservice enquiries answered immediately with the right questions asked</li>
+              <li>Lapsed and seasonal suppliers kept warm automatically, so the intake pipeline never goes quiet</li>
+            </ul>
+          </div>
+        </div>
+        <div class="closing"><strong>This page went from a contact form on your website to a working build before we'd ever spoken.</strong> That's the pace this works at — and finding where it pays off fastest at Cross Hands takes one conversation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Demo prepared for Dunbia</strong> · Cross Hands</div>
+    <div class="elw"><b>About this demo:</b> built on spec by <b>ELW Partners</b> (Cross Hands). All senders and messages are fictional; nothing is live and nothing is collected. If it's not wanted it gets deleted — no hard feelings. <b>evan.williams@elwpartners.com · elwpartners.com</b></div>
+  </div>
+</footer>
+
+<script>
+var SC = {
+  farmer: {
+    msg: "Bore da, Gwilym Davies ydw i o fferm ger Llandeilo. Mae gen i 38 o wartheg bîff wedi'u pesgi, yn barod o ddiwedd y mis. Aelod o Farm Assured. Oes diddordeb gyda chi, a beth yw'r drefn?",
+    lang: "Welsh", time: "90 sec", route: "LIVESTOCK PROCUREMENT · PRIORITY",
+    priority: true,
+    kv: [["Type","Livestock offer — finished beef cattle"],["Sender","Gwilym Davies, farm nr Llandeilo"],["Head","38, ready from end of month"],["Assurance","Farm Assured (to verify at intake)"],["Nearest site","Cross Hands (beef)"]],
+    draft: "Bore da Gwilym,\n\nDiolch am gysylltu — mae gennym ddiddordeb bob amser mewn gwartheg bîff wedi'u pesgi o ffermydd lleol. Bydd un o'n tîm caffael da byw yn eich ffonio cyn diwedd y bore i drafod pris, dyddiadau a chludiant.\n\nDunbia",
+    trans: "Translation: Thank you for getting in touch — we're always interested in finished beef cattle from local farms. One of our livestock procurement team will phone you before the end of the morning to discuss price, dates and haulage.",
+    routed: "Summary + extracted details sent to the <b>livestock procurement team</b> with a <b>priority flag</b> and a call-back task due within the hour. A farmer with 38 finished cattle is a supply opportunity, not an inbox item — if the reply is slow, the stock goes elsewhere."
+  },
+  buyer: {
+    msg: "Hi — I run purchasing for a foodservice group in the Midlands. Looking for a regular supply of PS-standard beef striploins and lamb legs, roughly weekly volumes. Who do I talk to about specs and pricing?",
+    lang: "English", time: "2 min", route: "SALES — BEEF & LAMB",
+    priority: true,
+    kv: [["Type","New trade enquiry — foodservice"],["Sender","Purchasing lead, Midlands foodservice group"],["Products","Beef striploins, lamb legs (PS standard)"],["Volume","Regular weekly"],["Next step","Spec sheet + sales call"]],
+    draft: "Thanks for getting in touch — you're through to the right place. I've passed your enquiry to our beef & lamb sales team with a note on the cuts and volumes you mentioned; someone who can talk specs and pricing will come back to you today.\n\nSo the call is useful: are you buying to a fixed spec document already, and is delivery to one site or several?\n\nDunbia",
+    trans: "",
+    routed: "Enquiry summarised and sent to the <b>beef &amp; lamb sales team</b> flagged as a new trade lead, with the two qualifying answers attached when they arrive. First response usually wins the account — this responds first."
+  },
+  applicant: {
+    msg: "Bună ziua, mă numesc Andrei și locuiesc în Llanelli. Caut un loc de muncă în producție. Am doi ani de experiență într-o fabrică de procesare a cărnii în România. Aveți posturi disponibile?",
+    lang: "Romanian", time: "90 sec", route: "CAREERS & HR — CROSS HANDS",
+    priority: false,
+    kv: [["Type","Job enquiry — production"],["Sender","Andrei, Llanelli"],["Experience","2 yrs meat processing (Romania)"],["Nearest site","Cross Hands (~20 min)"],["Transport","Has own transport — asked & confirmed"]],
+    draft: "Bună ziua Andrei,\n\nMulțumim pentru mesaj. Avem în prezent posturi de operator de producție la Cross Hands — experiența dumneavoastră în procesarea cărnii este exact ce căutăm. Puteți aplica direct aici: [link posturi Cross Hands]. Un lucru important: site-urile noastre sunt în zone rurale — aveți transport propriu până la Cross Hands?\n\nDunbia",
+    trans: "Translation: We currently have production operative roles at Cross Hands — your meat processing experience is exactly what we look for. You can apply directly here: [Cross Hands vacancies link]. One important thing: our sites are in rural areas — do you have your own transport to Cross Hands?",
+    routed: "Sent to <b>Careers &amp; HR</b> with the experience summary in English, matched to the open Cross Hands operative vacancies, transport question already asked. A qualified applicant answered in their own language within minutes applies; one who waits days applies somewhere else."
+  },
+  haulier: {
+    msg: "Afternoon — chasing invoice 4471 from three weeks back, livestock haulage into the Welsh sites. Been passed round twice now. Can someone confirm when it's being paid?",
+    lang: "English", time: "2 min", route: "ACCOUNTS PAYABLE",
+    priority: false,
+    kv: [["Type","Supplier invoice query"],["Sender","Livestock haulage contractor"],["Reference","Invoice 4471, ~3 weeks old"],["History","Second chase — already passed around"],["Next step","Match to PO + payment run date"]],
+    draft: "Thanks for the chase, and sorry it's done a lap of the houses. Your query is now with accounts payable with the invoice number attached — you'll get a payment date back from them today rather than another forwarding.\n\nDunbia",
+    trans: "",
+    routed: "Matched to the supplier record and sent to <b>accounts payable</b> with the invoice reference and the note that it's a second chase. Suppliers who haul your livestock ring the office less when the inbox answers properly — that's office hours back."
+  }
+};
+var current = "farmer";
+function pick(el){
+  document.querySelectorAll('#scenarios .chip').forEach(function(c){c.classList.remove('on')});
+  el.classList.add('on');
+  current = el.dataset.s;
+  document.getElementById('msg').value = SC[current].msg;
+  document.getElementById('pipe').style.display = 'none';
+}
+function send(){
+  var s = SC[current];
+  document.getElementById('st-time').textContent = s.time;
+  document.getElementById('st-lang').textContent = s.lang;
+  var rt = document.getElementById('route-tag');
+  rt.textContent = s.route;
+  rt.className = 'tag ' + (s.priority ? 'p' : 'r');
+  document.getElementById('lane-class').className = 'lane' + (s.priority ? ' priority' : '');
+  document.getElementById('kv').innerHTML = s.kv.map(function(p){return '<b>'+p[0]+'</b><span>'+p[1]+'</span>'}).join('');
+  document.getElementById('draft-body').textContent = s.draft;
+  var tr = document.getElementById('draft-trans');
+  tr.style.display = s.trans ? 'block' : 'none';
+  tr.textContent = s.trans;
+  document.getElementById('route-body').innerHTML = s.routed;
+  var pipe = document.getElementById('pipe');
+  pipe.style.display = 'block';
+  document.getElementById('step2').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('msg').value = SC.farmer.msg;
+</script>
+
+</body>
+</html>
