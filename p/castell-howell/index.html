@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Castell Howell — ask the whole range one question (preview)</title>
+<style>
+  :root{--ink:#14243a;--ink-soft:#4d5d74;--paper:#f4f6f9;--card:#fff;--navy:#123a5e;--navy-deep:#0d2c49;--red:#c8102e;--line:#dfe5ec;--radius:14px}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+  .preview-banner{background:#0d2c49;color:#fff;font-size:.86rem;padding:.55rem 0;text-align:center}
+  .preview-banner b{color:#ffd98a}
+  .topbar{background:var(--ink);color:#fff;font-size:.85rem;padding:.45rem 0}
+  .topbar .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  header.site{background:var(--card);border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;padding:.8rem 20px;gap:1rem}
+  .brand{font-weight:800;font-size:1.12rem}.brand small{display:block;font-weight:500;font-size:.72rem;color:var(--ink-soft);letter-spacing:.06em;text-transform:uppercase}
+  .hero{background:radial-gradient(1000px 480px at 85% -10%, rgba(18,58,94,.12),transparent 60%),linear-gradient(180deg,#fafcfe,var(--paper));padding:3rem 0 2.4rem}
+  .kicker{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);background:#e8eef5;border:1px solid #c9d7e4;padding:.3rem .8rem;border-radius:999px;margin-bottom:1rem}
+  .hero h1{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.14;letter-spacing:-.02em;max-width:28ch}
+  .hero p.lead{margin-top:1rem;font-size:1.05rem;color:var(--ink-soft);max-width:62ch}
+  section{padding:2.4rem 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 12px 30px rgba(18,42,68,.08);padding:1.6rem}
+  .card h2{font-size:1.15rem;margin-bottom:.2rem}
+  .card .sub{font-size:.87rem;color:var(--ink-soft);margin-bottom:1.1rem}
+  .chips{display:flex;flex-wrap:wrap;gap:.55rem}
+  .chip{background:#eef3f8;border:1px solid #c9d7e4;color:var(--navy-deep);font:inherit;font-size:.88rem;font-weight:600;padding:.55rem 1rem;border-radius:999px;cursor:pointer;text-align:left}
+  .chip:hover{background:#e0eaf3}
+  .chip.cy{border-style:dashed}
+  .chip:disabled{opacity:.45;cursor:default}
+  .cy-note{font-size:.78rem;color:var(--ink-soft);margin-top:.55rem;font-style:italic}
+  .console{display:none;margin-top:1.35rem;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .q-line{background:var(--navy);color:#fff;padding:.85rem 1.1rem;font-size:.95rem}
+  .q-line b{color:#ffd98a;font-weight:700;margin-right:.5rem}
+  .a-body{padding:1.1rem;background:#fbfcfe}
+  .a-intro{font-size:.95rem;margin-bottom:.9rem;min-height:1.4em}
+  .hits{display:grid;gap:.55rem}
+  .hit{display:flex;justify-content:space-between;align-items:center;gap:1rem;border:1px solid var(--line);background:#fff;border-radius:10px;padding:.7rem .95rem;font-size:.88rem;flex-wrap:wrap;opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
+  .hit.show{opacity:1;transform:none}
+  .hit b{font-size:.93rem}
+  .hit .meta{color:var(--ink-soft);font-size:.8rem;display:block}
+  .badges{display:flex;gap:.35rem;flex-wrap:wrap;justify-content:flex-end}
+  .badge{font-size:.7rem;font-weight:800;border-radius:999px;padding:.18rem .6rem;white-space:nowrap}
+  .badge.ok{background:#e2f2e4;color:#1e6a2b}
+  .badge.src{background:#e8eef5;color:#123a5e}
+  .upsell{margin-top:.9rem;border:1px dashed #c9d7e4;border-radius:10px;padding:.7rem .95rem;font-size:.86rem;background:#f4f8fc;display:none}
+  .upsell b{color:var(--navy-deep)}
+  .statline{margin-top:.9rem;font-size:.78rem;color:var(--ink-soft);display:none}
+  .statline b{color:var(--ink)}
+  .demo-note{margin-top:1rem;font-size:.76rem;color:var(--ink-soft);font-style:italic}
+  .band{background:var(--navy-deep);color:#fff;border-radius:var(--radius)}
+  .band-inner{padding:2.2rem 2rem;display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center}
+  .band h2{color:#fff;font-size:1.45rem;margin-bottom:.5rem}
+  .band p{color:#bccbdc;font-size:.95rem;max-width:54ch}
+  .band ul{list-style:none;margin-top:1rem;display:grid;gap:.6rem}
+  .band li{display:flex;gap:.6rem;align-items:baseline;font-size:.93rem;color:#e2eaf3}
+  .band li::before{content:"✓";color:#8fc2f0;font-weight:800}
+  .band li b{color:#fff}
+  .band .panel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:1.3rem;text-align:center;font-size:.9rem}
+  .band .panel strong{font-size:1.02rem}
+  footer{border-top:1px solid var(--line);padding:1.8rem 0 2.4rem;font-size:.84rem;color:var(--ink-soft)}
+  footer .wrap{display:grid;gap:.35rem}
+  .elw{background:#fff;border:1px solid var(--line);border-radius:12px;margin-top:1rem;padding:1rem 1.2rem;font-size:.86rem}
+  .elw b{color:var(--ink)}
+  @media (max-width:820px){.band-inner{grid-template-columns:1fr}.topbar .hide-m{display:none}.badges{justify-content:flex-start}}
+</style>
+</head>
+<body>
+
+<div class="preview-banner"><b>Working demo</b> — built on spec by ELW Partners for Castell Howell. Not live, not indexed by Google, no obligation. Product data below is an illustrative sample, not your real files.</div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="hide-m">Foodservice wholesale · Cross Hands Food Park</span>
+    <span>Helping make good food happen</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap"><span class="brand">Castell Howell<small>Range assistant — demo by ELW Partners</small></span></div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="kicker">AI range assistant · working demo</span>
+    <h1>12,000+ products. 28 catalogues. Now it's one question.</h1>
+    <p class="lead">Today your range lives across 28 separate page-flip catalogues, with allergen detail in the app or behind the portal login. But a chef at one of your 260+ schools or care homes doesn't think in catalogues — they think in questions. Ask one the way they would:</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="card">
+      <h2>Ask the whole range</h2>
+      <div class="sub">Tap a question — each one is answered across every catalogue at once, with allergen flags attached. In the live version this sits on your website, in the ordering portal, or inside telesales.</div>
+      <div class="chips" id="chips">
+        <button class="chip" onclick="ask(0,this)">A parent's flagged a nut allergy — which desserts are safe for a school menu?</button>
+        <button class="chip" onclick="ask(1,this)">Gluten-free fish Friday for 200 covers — what have you got?</button>
+        <button class="chip" onclick="ask(2,this)">Welsh-provenance beef for a pub Sunday menu</button>
+        <button class="chip cy" onclick="ask(3,this)">Oes pwdinau di-glwten gennych chi ar gyfer ysgolion?</button>
+      </div>
+      <div class="cy-note">Mae'n ateb yn Gymraeg hefyd — it answers in Welsh, too.</div>
+
+      <div class="console" id="console">
+        <div class="q-line"><b>Q</b><span id="q-text"></span></div>
+        <div class="a-body">
+          <div class="a-intro" id="a-intro"></div>
+          <div class="hits" id="hits"></div>
+          <div class="upsell" id="upsell"></div>
+          <div class="statline" id="statline"></div>
+        </div>
+      </div>
+
+      <div class="demo-note">Demo uses a small illustrative dataset standing in for the full range — sample codes, pack sizes and allergen flags. The live version reads your real product files and allergen data, stays in step with them, and only ever answers from them.</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:.4rem">
+  <div class="wrap">
+    <div class="band">
+      <div class="band-inner">
+        <div>
+          <h2>The question box is the smallest example</h2>
+          <p>The same approach — AI working over the systems you already run, not replacing them — is where cost comes out and revenue goes in at wholesale scale:</p>
+          <ul>
+            <li><b>Order intake:</b> customer emails and voicemail orders read, keyed and confirmed automatically — no re-typing into the ERP <a href="/p/celtica-foods/" style="color:#8fc2f0">(this one's already built — see it working on Celtica's order pile →)</a></li>
+            <li><b>Telesales co-pilot:</b> the gap in a customer's usual order spotted before the call ends, not after</li>
+            <li><b>Substitutions:</b> a short-stocked line answered with the nearest in-stock alternative, instantly, instead of a blank on the invoice</li>
+            <li><b>Back office:</b> invoice and PO matching, credit-application checks, delivery queries answered without a phone call</li>
+          </ul>
+        </div>
+        <div class="panel"><strong>Cost down, revenue up — measured</strong><p style="color:#bccbdc;margin-top:.4rem">Every automation gets a number put on it before it's built, and is judged against that number after.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Demo prepared for Castell Howell Foods</strong> · Cross Hands Food Park</div>
+    <div class="elw"><b>About this demo:</b> built on spec by <b>ELW Partners</b> (Cross Hands). All product data is an illustrative sample; nothing is live, nothing is collected, and no Castell Howell systems were touched. If it's not wanted it gets deleted — no hard feelings. <b>evan.williams@elwpartners.com · elwpartners.com</b></div>
+  </div>
+</footer>
+
+<script>
+var DATA=[
+ {q:"A parent's flagged a nut allergy — which desserts are safe for a school menu?",
+  intro:"Four school-suitable desserts with no nut ingredients and no 'may contain nuts' warning on spec — gluten-free options marked:",
+  hits:[
+   {n:"Chocolate Sponge Pudding (school portion)",m:"Sample code DES1042 · 2 × 24 ptn · frozen",b:[["ok","NUT-FREE"],["src","Dessert Guide, p.9"]]},
+   {n:"Gluten-Free Vanilla Cheesecake",m:"Sample code DES2210 · 1 × 14 ptn · pre-portioned",b:[["ok","NUT-FREE"],["ok","GLUTEN-FREE"],["src","Gluten Free, p.31"]]},
+   {n:"Fruit Jelly Pots (assorted)",m:"Sample code DES3305 · 4 × 12 pots · vegetarian",b:[["ok","NUT-FREE"],["ok","VEGAN"],["src","Buffet Range, p.12"]]},
+   {n:"Rice Pudding Catering Tins",m:"Sample code DES1180 · 6 × 2.5kg",b:[["ok","NUT-FREE"],["ok","GLUTEN-FREE"],["src","Dry &amp; Chilled, p.44"]]}],
+  up:"<b>Worth adding:</b> the same check run against this school's other regular lines found 2 items with a 'may contain' warning — flagged to the account manager with suggested swaps.",
+  stat:"Answered from <b>4 different catalogues</b> in one pass — a chef would have opened them one by one."},
+ {q:"Gluten-free fish Friday for 200 covers — what have you got?",
+  intro:"Three gluten-free battered/coated fish lines that scale to 200 covers, plus the sides to match:",
+  hits:[
+   {n:"Gluten-Free Battered Cod Fillets 140–170g",m:"Sample code FSH1120 · 1 × 5kg · MSC certified",b:[["ok","GLUTEN-FREE"],["src","Gluten Free, p.14"]]},
+   {n:"Gluten-Free Breaded Haddock Portions",m:"Sample code FSH1188 · 1 × 4.54kg",b:[["ok","GLUTEN-FREE"],["src","Gluten Free, p.15"]]},
+   {n:"Chip Shop Chips 18mm (naturally GF, dedicated fryer advised)",m:"Sample code POT2011 · 4 × 2.27kg",b:[["ok","GLUTEN-FREE"],["src","Chip Shop Range, p.6"]]}],
+  up:"<b>Worth adding:</b> GF-flagged curry sauce and mushy peas are in the range too — both usually ordered by sites running a GF fish Friday.",
+  stat:"Checked <b>every catalogue</b>, not just the Gluten Free one — the chips live in Chip Shop Range."},
+ {q:"Welsh-provenance beef for a pub Sunday menu",
+  intro:"Welsh-provenance beef options suited to a carvery/Sunday roast, striploin to brisket:",
+  hits:[
+   {n:"Celtic Pride Welsh Beef Striploin",m:"Sample code BEE4402 · avg 4–5kg · matured 21 days",b:[["ok","WELSH"],["src","Celtic Pride Steaks, p.4"]]},
+   {n:"Welsh Beef Topside (carvery trim)",m:"Sample code BEE4160 · avg 3–4kg",b:[["ok","WELSH"],["src","Welsh Produce, p.22"]]},
+   {n:"Welsh Beef Brisket (rolled)",m:"Sample code BEE4230 · avg 2.5–3.5kg · slow-roast",b:[["ok","WELSH"],["src","Welsh Produce, p.23"]]}],
+  up:"<b>Worth adding:</b> horseradish, Yorkshire pudding mix and a red-wine jus base — the three lines most often bought alongside these.",
+  stat:"Provenance answered with the product, not a leaflet — PGI status and supplier story attach to each line."},
+ {q:"Oes pwdinau di-glwten gennych chi ar gyfer ysgolion?",
+  intro:"Oes — dyma dri opsiwn di-glwten sy'n addas ar gyfer bwydlen ysgol:",
+  hits:[
+   {n:"Gluten-Free Vanilla Cheesecake",m:"Cod sampl DES2210 · 1 × 14 dogn",b:[["ok","DI-GLWTEN"],["src","Gluten Free, t.31"]]},
+   {n:"Rice Pudding Catering Tins",m:"Cod sampl DES1180 · 6 × 2.5kg",b:[["ok","DI-GLWTEN"],["src","Dry &amp; Chilled, t.44"]]},
+   {n:"Fruit Jelly Pots (assorted)",m:"Cod sampl DES3305 · 4 × 12 pot · fegan",b:[["ok","DI-GLWTEN"],["src","Buffet Range, t.12"]]}],
+  up:"<b>Werth ei ychwanegu:</b> mae hufen ac iogwrt di-glwten yn y rhestr hefyd.",
+  stat:"Yr un injan, dwy iaith — <b>the same engine answers in both languages</b>."}
+];
+var timers=[];
+function ask(i,btn){
+  timers.forEach(clearTimeout);timers=[];
+  var d=DATA[i];
+  document.querySelectorAll('.chip').forEach(function(c){c.disabled=false});
+  btn.disabled=true;
+  var con=document.getElementById('console');con.style.display='block';
+  document.getElementById('q-text').textContent=d.q;
+  var intro=document.getElementById('a-intro');intro.textContent='';
+  var hits=document.getElementById('hits');hits.innerHTML='';
+  var up=document.getElementById('upsell');up.style.display='none';up.innerHTML=d.up;
+  var st=document.getElementById('statline');st.style.display='none';st.innerHTML=d.stat;
+  var ch=0;
+  (function typeIntro(){
+    if(ch<=d.intro.length){intro.textContent=d.intro.slice(0,ch);ch+=3;timers.push(setTimeout(typeIntro,14));}
+    else{showHits();}
+  })();
+  function showHits(){
+    d.hits.forEach(function(h,j){
+      var el=document.createElement('div');el.className='hit';
+      el.innerHTML='<div><b>'+h.n+'</b><span class="meta">'+h.m+'</span></div><div class="badges">'+h.b.map(function(b){return '<span class="badge '+b[0]+'">'+b[1]+'</span>'}).join('')+'</div>';
+      hits.appendChild(el);
+      timers.push(setTimeout(function(){el.classList.add('show')},120*j+60));
+    });
+    timers.push(setTimeout(function(){up.style.display='block';st.style.display='block'},120*d.hits.length+260));
+  }
+  con.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+
+</body>
+</html>
